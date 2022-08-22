@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <script type="module" src="/build/auto-layout.esm.js"></script>
+    <script nomodule src="/build/auto-layout.js"></script>
+  </head>
+  <style>
+    html {
+      height: 100vh;
+      margin: 0;
+    }
+    body {
+      padding: 40px;
+    }
+    box {
+      min-height: 70px;
+      width: 50px;
+      display: block;
+      background-color: rgba(255, 0, 0, 0.493);
+    }
+    .blue {
+      background-color: rgba(0, 17, 255, 0.493);
+    }
+    .red {
+      background-color: rgba(255, 0, 0, 0.493);
+    }
+    .border {
+      border: 1px solid black;
+    }
+  </style>
+  <body>
+    <auto-layout>
+      <auto-layout class="border" height="200" direction="vertical" clip padding="small" gap="small">
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+        <box class="red"></box>
+      </auto-layout>
+    </auto-layout>
+  </body>
+</html>

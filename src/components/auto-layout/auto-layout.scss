@@ -1,0 +1,164 @@
+$scale: (
+	'xx-small'	: 4px,
+	'x-small'	: 8px,
+	'small'		: 16px,
+	'medium'	: 24px,
+	'regular'	: 32px,
+	'large'		: 40px,
+	'x-large'	: 56px,
+	'xx-large'	: 64px
+);
+
+:root {
+	@each $value, $size in $scale {
+		--#{$value}: #{$size};
+	}
+}
+
+/* MIXIN */
+@mixin padding-left($padding)        { padding-left     : var(--#{$padding});                                   }
+@mixin padding-right($padding)       { padding-right    : var(--#{$padding});                                   }
+@mixin padding-top($padding)         { padding-top      : var(--#{$padding});                                   }
+@mixin padding-bottom($padding)      { padding-bottom   : var(--#{$padding});                                   }
+
+@mixin space-between-items($gap)     { gap              : var(--#{$gap});                                       }
+
+auto-layout, *[auto-layout]  {
+	display:flex;
+
+	/* DIRECTION */
+		&[direction="vertical"], &[vertical], &:not([direction])      {
+			flex-direction:column;
+			&[align="top-left"]       { justify-content: flex-start;  align-items: flex-start;  }
+			&[align="top"]            { justify-content: flex-start;  align-items: center;      }
+			&[align="top-right"]      { justify-content: flex-start;  align-items: flex-end;    }
+			&[align="center-left"]    { justify-content: center;      align-items: flex-start;  }
+			&[align="center"]         { justify-content: center;      align-items: center;      }
+			&[align="center-right"]   { justify-content: center;      align-items: flex-end;    }
+			&[align="bottom-left"]    { justify-content: flex-end;    align-items: flex-start;  }
+			&[align="bottom"]         { justify-content: flex-end;    align-items: center;      }
+			&[align="bottom-right"]   { justify-content: flex-end;    align-items: flex-end;    }
+		}
+
+		&[direction="horizontal"], &[horizontal] {
+			flex-direction:row;
+			&[align="top-left"]       { justify-content: flex-start;  align-items: flex-start;}
+			&[align="top"]            { justify-content: center;      align-items: flex-start;}
+			&[align="top-right"]      { justify-content: flex-end;    align-items: flex-start;}
+			&[align="center-left"]    { justify-content: flex-start;  align-items: center;    }
+			&[align="center"]         { justify-content: center;      align-items: center;    }
+			&[align="center-right"]   { justify-content: flex-end;    align-items: center;    }
+			&[align="bottom-left"]    { justify-content: flex-start;  align-items: flex-end;  }
+			&[align="bottom"]         { justify-content: center;      align-items: flex-end;  }
+			&[align="bottom-right"]   { justify-content: flex-end;    align-items: flex-end;  }
+		}
+
+	/* SPACE BETWEEN ITEMS */
+	@each $gap, $size in $scale {
+		&[gap="#{$gap}"]
+		{
+			@include space-between-items($gap)
+		}
+	}
+
+	/* PADDING */
+	@each $padding, $size in $scale {
+		&[padding="#{$padding}"]
+		{
+			@include padding-top($padding);
+			@include padding-bottom($padding);
+			@include padding-left($padding);
+			@include padding-right($padding);
+		}
+
+		&[padding-vertical="#{$padding}"]
+		{
+			@include padding-top($padding);
+			@include padding-bottom($padding);
+		}
+
+		&[padding-horizontal="#{$padding}"]
+		{
+			@include padding-left($padding);
+			@include padding-right($padding);
+		}
+
+		&[padding-top="#{$padding}"]
+		{
+			@include padding-top($padding);
+		}
+
+		&[padding-bottom="#{$padding}"]
+		{
+			@include padding-bottom($padding);
+		}
+
+		&[padding-left="#{$padding}"]
+		{
+			@include padding-left($padding);
+		}
+
+		&[padding-right="#{$padding}"]
+		{
+			@include padding-right($padding);
+		}
+	}
+	/* SPACING MODE */
+		&[spacing-mode="packed"],
+		&[packed]
+		{
+			justify-content: flex-start !important;
+		}
+		&[spacing-mode="space-between"],
+		&[space-between]
+		{
+			justify-content: space-between !important;
+		}
+
+	/* CANVAS STACKING */
+		&[canvas-stacking="first"],
+		&[stacking="first"]
+		{
+			isolation: isolate;
+		}
+
+	/* TEXT BASELINE ALIGNMENT */
+		&[baseline-alignment],
+		&[baseline]
+		{
+			align-items: baseline !important;
+		}
+
+	/* HEIGHT */
+		&[height="hug"],
+		&[height="hug-content"]
+		{
+			height: fit-content;
+		}
+
+		&[height="fill"],
+		&[height="fill-container"]
+		{
+			height: 100%;
+		}
+
+	/* WIDTH */
+		&[width="hug"],
+		&[width="hug-content"]
+		{
+			width: fit-content;
+		}
+
+		&[width="fill"],
+		&[width="fill-container"]
+		{
+			width: 100%;
+		}
+
+	/* CLIP CONTENT */
+		&[clip],
+		&[clip-content]
+		{
+			overflow: hidden;
+		}
+}
